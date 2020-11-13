@@ -1,18 +1,19 @@
 import React from 'react';
 import Tour from './Tour';
 
-function Tours(props) {
+function Tours({tours, deleteTour}) {
     return (
         <section>
             <div className="title">
-                <h2>Out tours</h2>
+                <h2>Our tours</h2>
             </div>
             <div>
-                {props.tours.map((tour) => {
+                {tours.map((tour) => {
                     return (
                         <Tour 
                             key={tour.id}
                             {...tour}
+                            deleteTour={deleteTour}
                         />
                     )
                     })

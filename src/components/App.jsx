@@ -25,6 +25,14 @@ function App() {
     useEffect(() => {
         fetchTours();
     }, []);
+    
+    function deleteTour(id) {
+        setTours(prevValue => {
+            return prevValue.filter(tour => {
+                return tour.id !== id;
+            })
+        })
+    }
 
     if (loading) {
         return (
@@ -32,10 +40,19 @@ function App() {
                 <Loading />
             </main>
         );
+    } else if (tours.length === 0) {
+        return (
+            <main>
+                <div className="title">
+                    <h3>No Tours Left</h3>
+                    <button className="btn" onClick={() => fetchTours()}>Refresh</button>
+                </div>
+            </main>
+        );
     }
     return (
         <main>
-            <Tours tours={tours}/>
+            <Tours tours={tours} deleteTour={deleteTour}/>
         </main>
     );
 }
